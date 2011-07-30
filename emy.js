@@ -1,3 +1,9 @@
+/************************************************
+*	Emy.js										*
+*	Author: Jacob Nelson						*
+*	Contact me: iam@jnelson.in					*
+*	Website: http://jnelson.in					*
+************************************************/
 Array.prototype.sizeOf = function(){ return this.length; }
 Array.prototype.min = function(){ return Math.min.apply({},this) }
 Array.prototype.max = function(){ return Math.max.apply({},this) }
@@ -41,19 +47,10 @@ Array.prototype.unique = function(){
 	
 	return uniq_array;
 }
-Array.prototype.diff = function(){}
-Array.prototype.popAt = function(){}
-Array.prototype.insertAt = function(){}
-Array.prototype.rest = function(){}
-Array.prototype.from = function(){}
-//Returns a copy of the array with all instances of the values removed. === is used for the equality test.
-Array.prototype.without = function(){}
-//Computes the union of the passed-in arrays: the list of unique items, in order, that are present in one or more of the arrays.
-Array.prototype.union = function(){}
-//Computes the list of values that are the intersection of all the arrays. Each value in the result is present in each of the arrays.
-Array.prototype.intersection = function(){}
-//Returns the index of the last occurrence of value in the array, or -1 if value is not present. Uses the native lastIndexOf function if possible.
-Array.prototype.lastIndexOf = function(){}
-//A function to create flexibly-numbered lists of integers, handy for each and map loops. start, if omitted, defaults to 0; step defaults to 1. Returns a list of integers from start to stop, incremented (or decremented) by step, exclusive.
-Array.prototype.range = function(){}
-// http://documentcloud.github.com/underscore/
+Object.prototype.range = function(from, to, step){
+	if(typeof step == "undefined") step = 1;
+	var range_array = new Array();
+	for(i=from;i<=to;i+=step)
+		range_array.push(i);
+	return range_array;
+}
