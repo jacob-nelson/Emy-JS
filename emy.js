@@ -71,15 +71,15 @@ Object.prototype.range = function(from, to, step){
 	else if(typeof from == 'string'){
 		var lower = /[a-z]/;
 		var upper = /[A-Z]/;
-		fromCharCode = from.charCodeAt(0);
-		toCharCode = to.charCodeAt(0);
+		fromAscCode = from.charCodeAt(0);
+		toAscCode = to.charCodeAt(0);
 		if((from.match(lower) && to.match(lower)) || (from.match(upper) && to.match(upper))){
-			if(fromCharCode < toCharCode){
-				for(i=fromCharCode;i<=toCharCode;i++)
+			if(fromAscCode < toAscCode){
+				for(i=fromAscCode;i<=toAscCode;i++)
 					range_array.push(String.fromCharCode(i));
 			}
 			else{
-				for(i=fromCharCode;i>=toCharCode;i--)
+				for(i=fromAscCode;i>=toAscCode;i--)
 					range_array.push(String.fromCharCode(i));
 			}
 		}
