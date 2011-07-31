@@ -1,8 +1,7 @@
 /************************************************
-*	Emy.js										*
 *	Author: Jacob Nelson						*
-*	Contact me: iam@jnelson.in					*
-*	Website: http://jnelson.in					*
+*	Email Id: iam@jnelson.in					*
+*	Blog: http://jnelson.in						*
 ************************************************/
 Array.prototype.sizeOf = function(){ return this.length; }
 Array.prototype.min = function(){ return Math.min.apply({},this) }
@@ -43,14 +42,49 @@ Array.prototype.unique = function(){
 	for(i=0;i<this.sizeOf();i++){
 		if(uniq_array.search(this[i]) == -1)
 			uniq_array.push(this[i])
-	}
-	
+	}	
 	return uniq_array;
 }
+Array.prototype.diff = function(array2){
+	var diff_array = new Array();
+	for(i=0;i<this.length;i++){
+		if(!array2.present(this[i]))
+			diff_array.push(this[i]);
+	}
+	return diff_array;
+}
 Object.prototype.range = function(from, to, step){
+	if(typeof from != typeof to) return -1;
 	if(typeof step == "undefined") step = 1;
+	step = Math.abs(step);
 	var range_array = new Array();
-	for(i=from;i<=to;i+=step)
-		range_array.push(i);
+	if(typeof from == 'number'){
+		if(from > to){
+			for(i=from;i>=to;i-=step)
+				range_array.push(i);
+		}
+		else{
+			for(i=from;i<=to;i+=step)
+				range_array.push(i);
+		}
+	}
+	else if(typeof from == 'string'){
+		var lower = /[a-z]/;
+		var upper = /[A-Z]/;
+		fromCharCode = from.charCodeAt(0);
+		toCharCode = to.charCodeAt(0);
+		if((from.match(lower) && to.match(lower)) || (from.match(upper) && to.match(upper))){
+			if(fromCharCode < toCharCode){
+				for(i=fromCharCode;i<=toCharCode;i++)
+					range_array.push(String.fromCharCode(i));
+			}
+			else{
+				for(i=fromCharCode;i>=toCharCode;i--)
+					range_array.push(String.fromCharCode(i));
+			}
+		}
+		else
+			 return -1;
+	}
 	return range_array;
 }
