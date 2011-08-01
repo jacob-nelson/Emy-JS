@@ -27,6 +27,14 @@ Array.prototype.clear = function(){ this.length = 0; }
 Array.prototype.empty = function(){ this.clear(); }
 Array.prototype.search = function(obj){	return (this.indexOf(obj) != -1) ? this.indexOf(obj): -1; }
 Array.prototype.find = function(obj){return this.search(obj);}
+Array.prototype.findAll = function(obj){
+	var match_index = new Array();
+	for(i=0;i<this.sizeOf();i++){
+		if(this[i] === obj)
+			match_index.push(i);
+	}
+	return match_index;
+}
 Array.prototype.present = function(obj){return (this.indexOf(obj) != -1);}
 Array.prototype.compare = function(array2){
 	if(this.sizeOf() != array2.sizeOf(array2))
@@ -52,6 +60,38 @@ Array.prototype.diff = function(array2){
 			diff_array.push(this[i]);
 	}
 	return diff_array;
+}
+Array.prototype.from = function(index, length){
+	if(index > this.length)
+		return -1;
+	else{
+		if(typeof length == 'undefined') length = this.length;
+		length = Math.abs(length)+index;
+		return this.slice(index, length);
+	}
+}
+Array.prototype.flatten = function(){
+	var flattened = this.reduce(function(a,b) {
+		return a.concat(b);
+	}); 
+	return flattened;
+}
+Array.prototype.restOf = function(){ return this.exclude(Array.prototype.slice.call(arguments)) }
+Array.prototype.omit = function(){ return this.exclude(Array.prototype.slice.call(arguments)) }
+Array.prototype.without = function(){ return this.exclude(Array.prototype.slice.call(arguments)) }
+Array.prototype.exclude = function(){
+	var exclude_elements = Array.prototype.slice.call(arguments);
+	exclude_elements = exclude_elements.flatten();
+	var counter = 0;
+	while(counter<exclude_elements.length){
+		var ee_index = -1;
+		ee_index = this.search(exclude_elements[counter]);
+		if(ee_index == -1)
+			counter++;
+		else
+		this.splice(ee_index, 1);		
+	}
+	return this;
 }
 Object.prototype.range = function(from, to, step){
 	if(typeof from != typeof to) return -1;
