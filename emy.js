@@ -1,9 +1,8 @@
-/********************************************************
-*	Author: Jacob Nelson								*
-*	Email Id: iam@jnelson.in							*
-*	Blog: http://jnelson.in								*
-*	Help: http://javascript.jnelson.in/category/emy-js	*
-********************************************************/
+/************************************************
+*	Author: Jacob Nelson						*
+*	Email Id: iam@jnelson.in					*
+*	Blog: http://jnelson.in						*
+************************************************/
 Array.prototype.sizeOf = function(){ return this.length; }
 Array.prototype.min = function(){ return Math.min.apply({},this) }
 Array.prototype.max = function(){ return Math.max.apply({},this) }
@@ -180,3 +179,28 @@ Array.prototype.negate = function(){
 	var b = new Array(0);
 	return b.minus(this); 
 }
+Array.prototype.merge = function(array2){ return this.concat(array2); }
+Array.prototype.union = function(array2){
+	var merged = this.merge(array2);
+	return merged.unique();
+}
+Array.prototype.intersection = function(array2){
+	var intersection_array = new Array();
+	total = (this.sizeOf() > array2.sizeOf()) ? this.sizeOf() : array2.sizeOf();
+	for(i=0;i<total;i++){
+		if(this.sizeOf() > array2.sizeOf()){
+			if(array2.present(this[i]))
+				intersection_array.push(this[i]);
+		}
+		else{
+			if(this.present(array2[i]))
+				intersection_array.push(array2[i]);
+		}
+	}
+	
+	return intersection_array;
+}
+Array.prototype.addBy = function(num){return this.map(function(element, index, array){ return element+num});}
+Array.prototype.multiplyBy = function(num){return this.map(function(element, index, array){ return element*num});}
+Array.prototype.subtractBy = function(num){return this.map(function(element, index, array){ return element-num});}
+Array.prototype.divideBy = function(num){return this.multiplyBy(1/num);}
