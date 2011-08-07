@@ -204,3 +204,32 @@ Array.prototype.addBy = function(num){return this.map(function(element, index, a
 Array.prototype.multiplyBy = function(num){return this.map(function(element, index, array){ return element*num});}
 Array.prototype.subtractBy = function(num){return this.map(function(element, index, array){ return element-num});}
 Array.prototype.divideBy = function(num){return this.multiplyBy(1/num);}
+Array.prototype.popAt = function(index){
+	array_a = this.from(0, (index));
+	array_b = this.from(index+1);
+	new_array = array_a.merge(array_b);
+	return new_array;
+}
+Array.prototype.insertAt = function(index, new_value){
+	array_a = this.from(0, (index));
+	array_b = this.from(index);
+	array_a.push(new_value)
+	new_array = array_a.merge(array_b);
+	return new_array;
+}
+Array.prototype.insertAfter = function(element, new_value){
+	element_index = this.search(element);
+	array_a = this.from(0, (element_index+1));
+	array_b = this.from(element_index+1);
+	array_a.push(new_value)
+	new_array = array_a.merge(array_b);
+	return new_array;
+}
+Array.prototype.insertBefore = function(element, new_value){
+	element_index = this.search(element);
+	array_a = this.from(0, (element_index));
+	array_b = this.from(element_index);
+	array_a.push(new_value)
+	new_array = array_a.merge(array_b);
+	return new_array;
+}
