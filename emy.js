@@ -96,41 +96,6 @@ Array.prototype.exclude = function(){
 	}
 	return this;
 }
-Object.prototype.range = function(from, to, step){
-	if(typeof from != typeof to) return -1;
-	if(typeof step == "undefined") step = 1;
-	step = Math.abs(step);
-	var range_array = new Array();
-	if(typeof from == 'number'){
-		if(from > to){
-			for(i=from;i>=to;i-=step)
-				range_array.push(i);
-		}
-		else{
-			for(i=from;i<=to;i+=step)
-				range_array.push(i);
-		}
-	}
-	else if(typeof from == 'string'){
-		var lower = /[a-z]/;
-		var upper = /[A-Z]/;
-		fromAscCode = from.charCodeAt(0);
-		toAscCode = to.charCodeAt(0);
-		if((from.match(lower) && to.match(lower)) || (from.match(upper) && to.match(upper))){
-			if(fromAscCode < toAscCode){
-				for(i=fromAscCode;i<=toAscCode;i++)
-					range_array.push(String.fromCharCode(i));
-			}
-			else{
-				for(i=fromAscCode;i>=toAscCode;i--)
-					range_array.push(String.fromCharCode(i));
-			}
-		}
-		else
-			 return -1;
-	}
-	return range_array;
-}
 Array.prototype.fill = function(fillWith, startIndex, num){
 	var fillArray = new Array();
 	fillArray = this;
@@ -233,3 +198,44 @@ Array.prototype.insertBefore = function(element, new_value){
 	new_array = array_a.merge(array_b);
 	return new_array;
 }
+Object.prototype.range = function(from, to, step){
+	if(typeof from != typeof to) return -1;
+	if(typeof step == "undefined") step = 1;
+	step = Math.abs(step);
+	var range_array = new Array();
+	if(typeof from == 'number'){
+		if(from > to){
+			for(i=from;i>=to;i-=step)
+				range_array.push(i);
+		}
+		else{
+			for(i=from;i<=to;i+=step)
+				range_array.push(i);
+		}
+	}
+	else if(typeof from == 'string'){
+		var lower = /[a-z]/;
+		var upper = /[A-Z]/;
+		fromAscCode = from.charCodeAt(0);
+		toAscCode = to.charCodeAt(0);
+		if((from.match(lower) && to.match(lower)) || (from.match(upper) && to.match(upper))){
+			if(fromAscCode < toAscCode){
+				for(i=fromAscCode;i<=toAscCode;i++)
+					range_array.push(String.fromCharCode(i));
+			}
+			else{
+				for(i=fromAscCode;i>=toAscCode;i--)
+					range_array.push(String.fromCharCode(i));
+			}
+		}
+		else
+			 return -1;
+	}
+	return range_array;
+}
+// Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
