@@ -3,7 +3,18 @@
 *	Email Id: iam@jnelson.in					*
 *	Blog: http://jnelson.in						*
 ************************************************/
-Array.prototype.sizeOf = function(){ return this.length; }
+var toString = Object.prototype.toString;
+Array.prototype.sizeOf = function(){ 
+	var len = 0;
+	if(this.length)
+		len = this.length;
+	else
+	    for (var k in this)
+	      if(toString.call(this[k]) !== "[object Function]")
+	      	len++;
+	      
+	  return len;
+}
 Array.prototype.min = function(){ return Math.min.apply({},this) }
 Array.prototype.max = function(){ return Math.max.apply({},this) }
 Array.prototype.sum = function(){
@@ -29,10 +40,21 @@ Array.prototype.empty = function(){ this.clear(); }
 Array.prototype.search = function(obj){	return (this.indexOf(obj) != -1) ? this.indexOf(obj): -1; }
 Array.prototype.find = function(obj){return this.search(obj);}
 Array.prototype.findAll = function(obj){
+	if(!toString.call(this) === '[object Array]')
+		return -1;
 	var match_index = new Array();
-	for(i=0;i<this.sizeOf();i++){
-		if(this[i] === obj)
-			match_index.push(i);
+	if(this.length){
+		for(i=0;i<this.sizeOf();i++){
+			if(this[i] === obj)
+				match_index.push(i);
+		}
+	}
+	else{
+		for(key in this){
+			if(this[key] === obj)
+				match_index.push(key);
+		}
+		
 	}
 	return match_index;
 }
