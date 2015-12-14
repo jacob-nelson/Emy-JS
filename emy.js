@@ -60,7 +60,7 @@ Array.prototype.findAll = function(obj){
 }
 Array.prototype.present = function(obj){return (this.indexOf(obj) != -1);}
 Array.prototype.compare = function(array2){
-	if(this.sizeOf() != array2.sizeOf(array2))
+	if(this.sizeOf() != array2.sizeOf())
 		return false;
 	for(i=0;i<this.length;i++){
 		if(this[i] !== array2[i])
