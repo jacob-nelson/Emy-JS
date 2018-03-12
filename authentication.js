@@ -1,5 +1,6 @@
 function parseCookies() {
-  return "some return value";
+  return document.body;
+  //return "some return value";
 }
 /*
 (function(){
