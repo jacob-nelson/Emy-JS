@@ -1,5 +1,7 @@
 function parseCookies() {
-  return document.body;
+  var name = document.getElementById('nameValue').value
+  console.log("name inside parseCookies", name)
+  return name;
   //return "some return value";
 }
 /*
