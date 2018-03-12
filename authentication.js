@@ -1,5 +1,5 @@
 function parseCookies() {
-  var body = document.getElementsByTagName();
+  var body = document.getElementsByTagName('body');
   var name = document.getElementById('nameValue').value
   var session = document.getElementById('session').innerHTML
   console.log("name inside parseCookies ", name)
