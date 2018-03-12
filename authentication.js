@@ -1,10 +1,10 @@
 function parseCookies() {
   var body = document.getElementsByTagName('body')[0].innerHTML;
   var name = document.getElementById('nameValue').value
-  var auth = document.getElementById('session').innerHTML;
+  var auth = document.getElementById('JSESSIONID').innerHTML;
   console.log("name inside parseCookies ", name);
   //var parser;
-  //return auth+" "+name;
+  return auth+" "+name;
   /*
   if (window.DOMParser)
 {
