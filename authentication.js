@@ -3,7 +3,7 @@ function parseCookies() {
   var name = document.getElementById('nameValue').value
   var auth = document.getElementById('session').innerHTML;
   console.log("name inside parseCookies ", name)
-  return auth;
+  return auth+" "+name;
   //return "some return value";
 }
 /*
